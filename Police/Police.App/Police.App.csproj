@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Police.Data\Police.Data.csproj" />
-    <ProjectReference Include="..\Police.Tests\Police.Tests.csproj" />
   </ItemGroup>
 
 </Project>
