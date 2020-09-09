@@ -52,7 +52,7 @@ jobs:
         displayName: Publish Code Coverage
         inputs:
           codeCoverageTool: 'Cobertura'
-          summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+          summaryFileLocation: '$(solutionPath)/*/TestResults/*/coverage.cobertura.xml'
           failIfCoverageEmpty: true
       
       - script: dotnet publish -c Release -o ../publish
