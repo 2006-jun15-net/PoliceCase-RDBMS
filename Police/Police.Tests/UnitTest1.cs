@@ -8,7 +8,8 @@ namespace Police.Tests
         [Fact]
         public void Test1()
         {
-
+            string test = "howdy";
+            Assert.Equal("howdy", test);
         }
     }
 }
