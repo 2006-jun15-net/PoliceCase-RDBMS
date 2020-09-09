@@ -6,14 +6,63 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+pr:
+- master
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  solutionPath: Police
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+jobs:
+  - job: build_linux
+    pool:
+      vmImage: 'ubuntu-latest'
+    
+    steps:
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'SonarCloudPoliceRDBMS'
+          organization: '2006-jun15-net'
+          scannerMode: 'MSBuild'
+          projectKey: '2006-jun15-net_PoliceCase-RDBMS'
+          projectName: 'Police-RDBMS'
+          extraProperties: |
+            sonar.exclusions=**/lib/**
+            sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
+            sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
+
+      - script: dotnet build -c Release
+        displayName: Build Project/Application and Release Config
+        workingDirectory: $(solutionPath)
+    
+      - script: dotnet test -c Release --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+        displayName: Run project tests
+        workingDirectory: $(solutionPath)
+      
+      
+      - task: SonarCloudAnalyze@1
+        displayName: Run SonarCloud Analysis
+      
+      - task: SonarCloudPublish@1
+        displayName: Publish Analysis
+        inputs:
+          pollingTimeoutSec: '300'
+      
+
+      - task: PublishCodeCoverageResults@1
+        displayName: Publish Code Coverage
+        inputs:
+          codeCoverageTool: 'Cobertura'
+          summaryFileLocation: '$(solutionPath)/*/TestResults/*/coverage.cobertura.xml'
+          failIfCoverageEmpty: true
+      
+      - script: dotnet publish -c Release -o ../publish
+        displayName: Publish our application
+        workingDirectory: $(solutionPath)
+      
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Azure subscription 1(6bfb27c8-f9ac-40e8-9b4f-55922e406dbf)'
+          appType: 'webApp'
+          WebAppName: 'PoliceCaseDBMS'
+          packageForLinux: '$(System.DefaultWorkingDirectory)/publish'
