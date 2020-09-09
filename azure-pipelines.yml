@@ -18,6 +18,18 @@ jobs:
       vmImage: 'ubuntu-latest'
     
     steps:
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'SonarCloudPoliceRDBMS'
+          organization: '2006-jun15-net'
+          scannerMode: 'MSBuild'
+          projectKey: '2006-jun15-net_PoliceCase-RDBMS'
+          projectName: 'Police-RDBMS'
+          extraProperties: |
+            sonar.exclusions=**/lib/**
+            sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
+            sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/*/coverage.opencover.xml
+
       - script: dotnet build -c Release
         displayName: Build Project/Application and Release Config
         workingDirectory: $(solutionPath)
@@ -29,6 +41,21 @@ jobs:
           projects: '$(solutionPath)'
           arguments: '-c Release --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover'
           testRunTitle: 'ubuntu'
+      
+      - task: SonarCloudAnalyze@1
+        displayName: Run SonarCloud Analysis
+      
+      - task: SonarCloudPublish@1
+        displayName: Publish Analysis
+        inputs:
+          pollingTimeoutSec: '300'
+      
+      - task: PublishCodeCoverageResults@1
+        displayName: Publish Code Coverage
+        inputs:
+          codeCoverageTool: 'Cobertura'
+          summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+          failIfCoverageEmpty: true
       
       - script: dotnet publish -c Release -o ../publish
         displayName: Publish our application
