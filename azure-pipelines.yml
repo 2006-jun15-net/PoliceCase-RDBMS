@@ -28,17 +28,24 @@ jobs:
           extraProperties: |
             sonar.exclusions=**/lib/**
             sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
-            sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
+            sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/*/coverage.opencover.xml
 
       - script: dotnet build -c Release
         displayName: Build Project/Application and Release Config
         workingDirectory: $(solutionPath)
     
-      - script: dotnet test -c Release --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+      #- script: dotnet test -c Release --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+        #displayName: Run project tests
+        #workingDirectory: $(solutionPath)
+      
+      - task: DotNetCoreCLI@2
         displayName: Run project tests
-        workingDirectory: $(solutionPath)
-      
-      
+        inputs:
+          command: 'test'
+          projects: '$(solutionPath)'
+          arguments: '-c Release --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover'
+          testRunTitle: 'ubuntu'
+
       - task: SonarCloudAnalyze@1
         displayName: Run SonarCloud Analysis
       
@@ -52,7 +59,8 @@ jobs:
         displayName: Publish Code Coverage
         inputs:
           codeCoverageTool: 'Cobertura'
-          summaryFileLocation: '$(solutionPath)/*/TestResults/*/coverage.cobertura.xml'
+          summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+          #summaryFileLocation: '$(solutionPath)/*/TestResults/*/coverage.cobertura.xml'
           failIfCoverageEmpty: true
       
       - script: dotnet publish -c Release -o ../publish
