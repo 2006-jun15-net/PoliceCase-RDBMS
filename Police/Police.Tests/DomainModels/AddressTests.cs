@@ -54,5 +54,24 @@ namespace Police.Tests.DomainModels
         {
             Assert.ThrowsAny<ArgumentException>(() => address.State = String.Empty);
         }
+
+        [Fact]
+        public void Zipcode_Valid()
+        {
+            int test = 12345;
+            address.Zipcode = test;
+
+            Assert.Equal(test, address.Zipcode);
+        }
+
+        [Fact]
+        public void ExceptionThrown_When_Zipcode_Invalid()
+        {
+            Assert.ThrowsAny<ArgumentException>(() => address.Zipcode = 1);
+            Assert.ThrowsAny<ArgumentException>(() => address.Zipcode = 12);
+            Assert.ThrowsAny<ArgumentException>(() => address.Zipcode = 123);
+            Assert.ThrowsAny<ArgumentException>(() => address.Zipcode = 1234);
+            Assert.ThrowsAny<ArgumentException>(() => address.Zipcode = 123456);
+        }
     }
 }
