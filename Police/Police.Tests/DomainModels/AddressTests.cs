@@ -39,5 +39,20 @@ namespace Police.Tests.DomainModels
         {
             Assert.ThrowsAny<ArgumentException>(() => address.City = String.Empty);
         }
+
+        [Fact]
+        public void State_Valid()
+        {
+            string test = "test state";
+            address.State = test;
+
+            Assert.Equal(test, address.State);
+        }
+
+        [Fact]
+        public void ExceptionThrown_When_State_Empty()
+        {
+            Assert.ThrowsAny<ArgumentException>(() => address.State = String.Empty);
+        }
     }
 }
