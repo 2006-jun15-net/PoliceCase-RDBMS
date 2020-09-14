@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Police.App", "Police.App\Police.App.csproj", "{C92446A5-82D8-46A7-8480-06238618F871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Police.App", "Police.App\Police.App.csproj", "{C92446A5-82D8-46A7-8480-06238618F871}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Police.Data", "Police.Data\Police.Data.csproj", "{C4CF7CF3-04D5-465D-8D1D-5FBAE5F897D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Police.Data", "Police.Data\Police.Data.csproj", "{C4CF7CF3-04D5-465D-8D1D-5FBAE5F897D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Police.Tests", "Police.Tests\Police.Tests.csproj", "{BB52A69C-F657-4F24-AA6C-599CD93561D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Police.Tests", "Police.Tests\Police.Tests.csproj", "{BB52A69C-F657-4F24-AA6C-599CD93561D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Police.Domain", "Police.Domain\Police.Domain.csproj", "{5EBCA5C9-8676-4163-B657-AF84EDC74F2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{BB52A69C-F657-4F24-AA6C-599CD93561D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB52A69C-F657-4F24-AA6C-599CD93561D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB52A69C-F657-4F24-AA6C-599CD93561D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EBCA5C9-8676-4163-B657-AF84EDC74F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EBCA5C9-8676-4163-B657-AF84EDC74F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EBCA5C9-8676-4163-B657-AF84EDC74F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EBCA5C9-8676-4163-B657-AF84EDC74F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

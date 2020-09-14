@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Police.Data\Police.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityTests\" />
+  </ItemGroup>
+
 </Project>
