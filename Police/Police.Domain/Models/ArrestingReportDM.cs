@@ -6,19 +6,19 @@ namespace Police.Domain.Models
 {
     public class ArrestingReportDM
     {
-        private string _reportID;
+        private string _id;
         private string _arrestingOfficer;
 
-        public string ReportID 
+        public string ID 
         {
-            get => _reportID;
+            get => _id;
             set
             {
                 if (value.Length == 0)
                 {
                     throw new ArgumentException("Report ID cannot be empty", nameof(value));
                 }
-                _reportID = value;
+                _id = value;
             }
         }
         public string ArrestingOfficer 
@@ -39,7 +39,7 @@ namespace Police.Domain.Models
 
         public ArrestingReportDM(string reportID, string officer, DateTime arrestDate, int criminal, int crime)
         {
-            ReportID = reportID;
+            ID = reportID;
             ArrestingOfficer = officer;
             ArrestDate = arrestDate;
             CriminalID = criminal;

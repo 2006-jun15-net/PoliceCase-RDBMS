@@ -6,22 +6,22 @@ namespace Police.Domain.Models
 {
     public class AutopsyReportDM
     {
-        private string _reportID;
+        private string _id;
         private string _mannerOfDeath;
         private string _causeOfDeath;
         private string _examiner;
         private string _caseNumber;
 
-        public string ReportID 
+        public string ID 
         {
-            get => _reportID;
+            get => _id;
             set
             {
                 if (value.Length == 0)
                 {
                     throw new ArgumentException("Report ID cannot be empty", nameof(value));
                 }
-                _reportID = value;
+                _id = value;
             }
         }
         public string MannerOfDeath 
@@ -77,7 +77,7 @@ namespace Police.Domain.Models
 
         public AutopsyReportDM(string report, string mannerOfDeath, string causeOfDeath, string examiner, DateTime date, int victim, string caseNumber)
         {
-            ReportID = report;
+            ID = report;
             MannerOfDeath = mannerOfDeath;
             CauseOfDeath = causeOfDeath;
             Examiner = examiner;

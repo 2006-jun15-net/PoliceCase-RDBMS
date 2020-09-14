@@ -8,7 +8,7 @@ namespace Police.Domain.Models
     {
         private string _classification;
 
-        public int CrimeID { get; set; }
+        public int ID { get; set; }
         public string Classification 
         {
             get => _classification;
@@ -24,7 +24,7 @@ namespace Police.Domain.Models
 
         public CrimeDM(int ID, string classification)
         {
-            CrimeID = ID;
+            this.ID = ID;
             Classification = classification;
         }
 
