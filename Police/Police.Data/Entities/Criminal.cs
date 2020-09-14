@@ -18,7 +18,6 @@ namespace Police.Data.Entities
         public DateTime? Dob { get; set; }
         public string BodyMarks { get; set; }
         public byte[] Portrait { get; set; }
-        public string Occupation { get; set; }
         public int? CurrentAddress { get; set; }
 
         public virtual Address CurrentAddressNavigation { get; set; }

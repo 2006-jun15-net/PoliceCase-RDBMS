@@ -11,11 +11,14 @@ namespace Police.Data.Entities
             Evidence = new HashSet<Evidence>();
         }
 
-        public int CaseId { get; set; }
-        public int PoliceReportId { get; set; }
-        public int ArrestingReportId { get; set; }
+        public string CaseNumber { get; set; }
+        public bool Active { get; set; }
+        public string Detective { get; set; }
+        public string PoliceReportId { get; set; }
+        public string ArrestingReportId { get; set; }
 
         public virtual ArrestingReport ArrestingReport { get; set; }
+        public virtual Officer DetectiveNavigation { get; set; }
         public virtual PoliceReport PoliceReport { get; set; }
         public virtual ICollection<AutopsyReport> AutopsyReport { get; set; }
         public virtual ICollection<Evidence> Evidence { get; set; }

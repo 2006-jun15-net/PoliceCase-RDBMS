@@ -8,8 +8,8 @@ namespace Police.Data.Entities
         public int EvidenceId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int? CaseId { get; set; }
+        public string CaseNumber { get; set; }
 
-        public virtual CaseFolder Case { get; set; }
+        public virtual CaseFolder CaseNumberNavigation { get; set; }
     }
 }
