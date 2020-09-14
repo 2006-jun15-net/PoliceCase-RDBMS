@@ -30,7 +30,7 @@ namespace Police.App
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<PoliceDBContext>(options =>
+            services.AddDbContext<TestingDBContext>(options =>
                 options
                 .UseLoggerFactory(loggerFactory)
                 .UseSqlServer(Configuration.GetConnectionString("SqlServer")));
