@@ -16,10 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Police.App\Police.App.csproj" />
     <ProjectReference Include="..\Police.Data\Police.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EntityTests\" />
+    <ProjectReference Include="..\Police.Domain\Police.Domain.csproj" />
   </ItemGroup>
 
 </Project>

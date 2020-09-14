@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Police.Domain.Models
 {
-    class AddressDM
+    public class AddressDM
     {
         private string _street;
         private string _city;
@@ -62,5 +62,16 @@ namespace Police.Domain.Models
                 _zipcode = value;
             }
         }
+
+        public AddressDM(int ID, string street, string city, string state, int zip)
+        {
+            this.ID = ID;
+            Street = street;
+            City = city;
+            State = state;
+            Zipcode = zip;
+        }
+
+        public AddressDM() { }
     }
 }
