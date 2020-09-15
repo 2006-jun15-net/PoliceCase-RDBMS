@@ -40,31 +40,22 @@ namespace Police.Tests.DomainModels
             Assert.ThrowsAny<ArgumentException>(() => criminal.LastName = String.Empty);
         }
 
-        [Fact]
-        public void Sex_Valid()
+        [Theory]
+        [InlineData("Male")]
+        [InlineData("Female")]
+        [InlineData("Other")]
+        public void Sex_Valid(string sex)
         {
-            string male = "Male";
-            string female = "Female";
-            string other = "Other";
-
-            criminal.Sex = male;
-            Assert.Equal(male, criminal.Sex);
-            criminal.Sex = female;
-            Assert.Equal(female, criminal.Sex);
-            criminal.Sex = other;
-            Assert.Equal(other, criminal.Sex);
+            criminal.Sex = sex;
+            Assert.Equal(sex, criminal.Sex);
         }
 
-        [Fact]
-        public void ThrowException_When_Sex_Empty()
+        [Theory]
+        [InlineData("")]
+        [InlineData("test sex")]
+        public void ThrowException_When_Sex_Invalid(string sex)
         {
-            Assert.ThrowsAny<ArgumentException>(() => criminal.Sex = String.Empty);
-        }
-
-        [Fact]
-        public void ThrowException_When_Sex_Invalid()
-        {
-            Assert.ThrowsAny<ArgumentException>(() => criminal.Sex = "test sex");
+            Assert.ThrowsAny<ArgumentException>(() => criminal.Sex = sex);
         }
     }
 }
