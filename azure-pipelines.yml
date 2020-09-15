@@ -37,8 +37,7 @@ jobs:
       - script: dotnet test -c Release --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
         displayName: Run project tests
         workingDirectory: $(solutionPath)
-      
-      
+
       - task: SonarCloudAnalyze@1
         displayName: Run SonarCloud Analysis
       
@@ -53,7 +52,7 @@ jobs:
         inputs:
           codeCoverageTool: 'Cobertura'
           summaryFileLocation: '$(solutionPath)/*/TestResults/*/coverage.cobertura.xml'
-          failIfCoverageEmpty: true
+          failIfCoverageEmpty: false
       
       - script: dotnet publish -c Release -o ../publish
         displayName: Publish our application
